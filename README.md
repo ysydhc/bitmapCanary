@@ -1,2 +1,3 @@
 # bitmapCanary
-检查View和Bitmap大小差值，并能在UI上提示
+检查View和Bitmap大小差值，并能在UI上提示。
+对需要对项目的图片内存优化有需求的，可以快速定位一下是否存在图片和View的大小不一致的情况。
