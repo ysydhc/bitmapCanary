@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+java {
+    withSourcesJar() // 自动生成项目的源码jar包（重要！）
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src'] // 默认值，可省略
+            // 添加额外源码目录 (Gradle 8.x 支持绝对路径)
+            // srcDirs += file('src/generated/java')
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.ysydhc.bitmapScan.Main'
+        attributes 'Manifest-Version': "1.0.3"
+    }
+}
+
+task makeJar(type: Copy, dependsOn: [build, jar]) {
+    group = "bitmapscanimpl"
+    from('build/libs') {
+        include '*.jar'
+        exclude '*-javadoc.jar'
+        exclude '*-sources.jar'
+    }
+    into(project.file("libs"))
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
